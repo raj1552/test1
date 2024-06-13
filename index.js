@@ -58,8 +58,89 @@ close.addEventListener('click', () => {
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-  if (event.target == modal) {
+  if (event.target == model) {
     model.style.display = "none";
   }
 }
 
+
+
+document.querySelector('.ham-burger').addEventListener('click', () => {
+    const navLinks = document.querySelector('.nav');
+    if (navLinks.style.display === 'flex') {
+        navLinks.style.display = 'none';
+    } else {
+        navLinks.style.display = 'flex';
+    }
+});
+
+
+// Fetch json data
+
+document.addEventListener("DOMContentLoaded", () => {
+    const parentelement = document.getElementById('news-cards');
+
+    if (!parentelement) {
+        console.error('No element with class "news-card-container" found.');
+        return;
+    }
+
+const fetchdata = async () => {
+    try{
+        const response = await fetch('data.json')
+        const data = await response.json()
+
+        data.news.map(items => {
+                  
+        const newsDiv = document.createElement('div')
+        newsDiv.className = 'news-card'
+
+        const newsImageDiv = document.createElement('div')
+        newsImageDiv.className = 'news-image'
+        newsDiv.appendChild(newsImageDiv)
+
+        const image = document.createElement('img')
+        image.src = items.image
+        image.alt =''
+        newsImageDiv.appendChild(image)
+
+        const infoContainer = document.createElement('div')
+        infoContainer.className = 'info-container'
+
+        const newsInformation = document.createElement('div')
+        newsInformation.className = 'news-information'
+
+        infoContainer.appendChild(newsInformation)
+
+        const title = document.createElement('h1');
+        title.textContent = items.title;
+
+        const description = document.createElement('p')
+        description.textContent =  items.content 
+        newsInformation.appendChild(title)
+        newsInformation.appendChild(description)
+
+        const buttonDiv = document.createElement('div')
+        buttonDiv.className = 'card-btn'
+        const button = document.createElement('button')
+        button.textContent = 'Learn more'
+        const icon = document.createElement('i')
+        icon.className = 'fa-solid fa-arrow-right'
+        buttonDiv.appendChild(button)
+        buttonDiv.appendChild(icon)
+
+        infoContainer.appendChild(buttonDiv)
+        
+        newsDiv.appendChild(infoContainer);
+        parentelement.appendChild(newsDiv);
+    })
+ 
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
+fetchdata()
+
+})

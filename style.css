@@ -9,6 +9,30 @@ body{
     background-color: #F9F9FF;
 }
 
+#scroll-to-Top{
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    width: 48px;
+    height: 48px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px 0px #00000014;
+    border: none;
+    padding: 10px;
+    border-radius: 100%;
+    cursor: pointer;
+    z-index: 999;
+}
+
+#scroll-to-Top:hover{
+    color: #1D6FA3;
+}
+
+#scroll-to-Top i{
+    font-size: 20px;
+}
+
 .main{
     display: flex;
     flex-direction: column;
@@ -82,6 +106,17 @@ body{
     font-size: 30px;
 }
 
+.nav-items .close-button{
+    display: none;
+}
+
+.nav-items .close-button i{
+    cursor: pointer;
+    color: white;
+    width: 20px;
+    height: 20px;
+}
+
 .searchbar i{
     cursor: pointer;
     color: white;
@@ -107,7 +142,7 @@ body{
         top: 80px;
         right: 0;
         width: 100%;
-        height: 80%;
+        height: 730px;
         background-color: rgba(0, 45, 91, 0.9);
         gap: 60px;
         z-index: 1;
@@ -119,6 +154,9 @@ body{
     }
 
     .nav-items .nav-essentials .nav-links ul li {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         padding: 10px 0;
         transition: 0.5s ease-in-out;
     }
@@ -252,12 +290,21 @@ body{
     transform: translate(-50%, -50%);
     width: 100%;
 }
+
 .banner-container .banner-information{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 24px;
+    opacity:0;
+    transform: translateY(40%);
+    transition: all 2s ease-out;
+}
+
+.banner-information.active {
+    opacity: 4;
+    transform: translateY(0);
 }
 
 .banner-container .banner-information h1{
@@ -268,6 +315,7 @@ body{
     text-align: center;
     color: #FFFFFF;
 }
+
 
 .banner-container .banner-information p{
     font-size: 20px;
@@ -288,6 +336,14 @@ body{
     background: #FFFFFF1A;
     box-shadow: 0px 1px 2px 0px #1018280D;
     border-radius: 8px;
+    opacity:0;
+    transform: translateY(40%);
+    transition: all 2s ease-out;
+}
+
+.banner-container .btn.target{
+    opacity: 4;
+    transform: translateY(0);
 }
 
 .banner-container .btn p{
@@ -309,7 +365,19 @@ body{
 }
 
 /* Responsive */
-
+@media (max-width: 916px) {
+    .nav-links .hover-item .hover-container .items{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .nav-links .hover-item .hover-container {
+        position: static;
+        border: none;
+        margin: 20px 0 0 0;
+        box-shadow: none;
+    }
+}
 @media (max-width: 990px) {
     .banner-container .banner-information{
         margin: 0 auto;
@@ -335,6 +403,20 @@ body{
 @media (max-width: 494px){
     .main-container{
         height: 1030px;
+    }
+}
+
+@media (max-width: 460px){
+    .nav-links .hover-item .hover-container{
+        width: 295px;
+        height: 265px;
+    }
+}
+
+@media (max-width: 370px){
+    .nav-links .hover-item .hover-container{
+        width: 240px;
+        height: 290px;
     }
 }
 
@@ -392,6 +474,14 @@ body{
     background-color: #FFFFFF;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     font-family: 'DM Sans';
+    opacity:0;
+    transform: translateY(40%);
+    transition: all 2s ease-out;
+}
+
+.features-cards .card.fade-up {
+    opacity:4;
+    transform: translateY(0);
 }
 
 .features-cards .card:hover{
@@ -502,12 +592,20 @@ body{
     align-items: flex-start;
     flex-direction: column;
     gap: 48px;
+    opacity: 0;
+    transform: translateX(-40%);
+    transition: all 2s ease-out;
 }
 
 .whoweare-container .whoweare-elements .whoweare-elements-header {
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.whoweare-container .whoweare-elements.fade-left{
+    opacity:4;
+    transform: translateX(0);
 }
 
 .whoweare-container .whoweare-elements .whoweare-elements-header h1{
@@ -576,6 +674,13 @@ body{
     display: flex;
     flex-direction: column;
     gap: 24px;
+    opacity:0;
+    transform: translateY(40%);
+    transition: all 2s ease-out;
+}
+.whoweare-container .whoweare-image-container .column1-image .image.active{
+    opacity: 4;
+    transform: translateY(0);
 }
 
 .whoweare-container .whoweare-image-container .column1-image .image h1{
@@ -597,6 +702,14 @@ body{
     display: flex;
     flex-direction: column;
     gap: 24px;
+    opacity:0;
+    transform: translateY(40%);
+    transition: all 2s ease-out;
+}
+
+.whoweare-container .whoweare-image-container .column2-image .image.active{
+    opacity: 4;
+    transform: translateY(0);
 }
 
 .whoweare-container .whoweare-image-container .column2-image .image h1{
@@ -650,12 +763,15 @@ body{
 }
 .carousel {
     position: relative;
-    width: 1000px;
+    display: flex;
+    gap: 65px;
     overflow: hidden;
+    max-width: 100%;
 }
 
 .carousel-container{
     display: flex;
+    max-width: 943px;
     gap: 65px;
     transition: transform 0.5s ease;
 }
@@ -671,22 +787,39 @@ body{
 }
 
 .carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    background-color: #F9F9FF;
     border: none;
     cursor: pointer;
     z-index: 100;
 }
 
-.carousel-button.left {
-    background-color: transparent;
-    left: 0;
+@media (max-width: 1160px){
+    .carousel-container{
+        width: 735px;
+    }
 }
 
-.carousel-button.right {
-    right: 0;
+@media (max-width: 930px){
+    .carousel-container{
+        width: 528px;
+    }
 }
+
+@media (max-width: 730px){
+    .carousel-container{
+        width: 325px;
+    }
+}
+
+@media (max-width: 515px){
+    .carousel{
+        gap: 55px;
+    }
+    .carousel-container{
+        width: 105px;
+    }
+}
+
 
 /* News */
 
@@ -751,6 +884,14 @@ body{
     padding: 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     cursor: pointer;
+    opacity:0;
+    transform: translateY(40%);
+    transition: all 2s ease-out;
+}
+
+.news-container .news-cards-container .news-card.card-up{
+    opacity: 4;
+    transform: translateY(0);
 }
 
 .news-container .news-cards-container .news-card:hover{
@@ -953,6 +1094,14 @@ body{
     height: 337.45px;
     border-radius: 21.83px;
     background-color: #FFFFFF;
+    opacity:0;
+    transform: translateY(40%);
+    transition: all 2s ease-out;
+}
+
+.resources-card-container .resource-card.active{
+    opacity:4;
+    transform: translateY(0);
 }
 
 .resources-card-container .resource-card:hover{

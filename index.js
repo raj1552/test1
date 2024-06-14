@@ -1,3 +1,5 @@
+
+// Carousel
 const carousel = document.querySelector('.carousel-container')
 const items = document.querySelectorAll('.carousel-items')
 const itemWidth = items[0].clientWidth
@@ -7,8 +9,6 @@ const rightDirection = document.getElementById('right-arrow')
 let index = 0
 let startX;
 let letdragging = false
-
-let autoSlide = setInterval(rightDirection, 3000)
 
 leftDirection.addEventListener('click', () => {
     if(index === 0){
@@ -33,7 +33,7 @@ rightDirection.addEventListener('click', () => {
 })
 
 function updateCarousel() {
-    carousel.style.transform = `translateX(${-index * itemWidth}px)`;
+    carousel.style.transform = `translateX(${-index * 198}px)`;
 }
 
 function resetAutoSlide() {
@@ -42,8 +42,8 @@ function resetAutoSlide() {
 }
 
 
-// Overlay on search bar
 
+// Overlay on search bar
 const model = document.getElementById('search-model')
 const btn = document.getElementById('search-button')
 const close = document.getElementsByClassName('close')[0]
@@ -64,19 +64,29 @@ window.onclick = function(event) {
 }
 
 
-
-document.querySelector('.ham-burger').addEventListener('click', () => {
+// Hamburger for mobile responsive
+document.querySelector('#ham-burger').addEventListener('click', () => {
     const navLinks = document.querySelector('.nav');
-    if (navLinks.style.display === 'flex') {
-        navLinks.style.display = 'none';
-    } else {
-        navLinks.style.display = 'flex';
-    }
+    const hamBurger = document.querySelector('#ham-burger');
+    const closeButton = document.querySelector('#close-button');
+    
+    navLinks.style.display = 'flex';
+    hamBurger.style.display = 'none';
+    closeButton.style.display = 'block';
+});
+
+document.querySelector('#close-button').addEventListener('click', () => {
+    const navLinks = document.querySelector('.nav');
+    const hamBurger = document.querySelector('#ham-burger');
+    const closeButton = document.querySelector('#close-button');
+    
+    navLinks.style.display = 'none';
+    hamBurger.style.display = 'block';
+    closeButton.style.display = 'none';
 });
 
 
 // Fetch json data
-
 document.addEventListener("DOMContentLoaded", () => {
     const parentelement = document.getElementById('news-cards');
 
@@ -133,6 +143,32 @@ const fetchdata = async () => {
         
         newsDiv.appendChild(infoContainer);
         parentelement.appendChild(newsDiv);
+
+        const newsCard = document.querySelectorAll('.news-card')
+
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: .4
+        }
+
+        const newscards = (entries) => {
+            let delay = 0
+            entries.forEach(entry => {
+              if (entry.isIntersecting){
+                setTimeout(() => {
+                    entry.target.classList.add('card-up');
+                }, delay)
+                delay += 200
+              }
+            })
+        }
+        
+        let news = new IntersectionObserver(newscards, options);
+            newsCard.forEach(element => {
+            news.observe(element);
+        });
+        
     })
  
     }
@@ -140,7 +176,117 @@ const fetchdata = async () => {
         console.log(error)
     }
 }
+    fetchdata()
+})
 
-fetchdata()
 
+const elements = document.querySelectorAll('.banner-information')
+const card = document.querySelectorAll('.card')
+const whoweareElement = document.querySelectorAll('.whoweare-elements')
+const whoweareImage =  document.querySelectorAll('.image')
+const buttonAnimation = document.querySelectorAll('.btn')
+const resourceCard = document.querySelectorAll('.resource-card')
+const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: .3
+}
+
+const callbacks = (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('active');
+      }
+    });
+}
+
+const callback = (items) => {
+    items.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('target');
+      }
+    });
+}
+
+
+const fadeup = (entries) => {
+    let delay = 0
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        setTimeout(() => {
+            entry.target.classList.add('active');
+        }, delay)
+        delay += 200
+      }
+    })
+}
+
+const fadecall = (entries) => {
+    let delay = 0
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        setTimeout(() => {
+            entry.target.classList.add('fade-up');
+        }, delay)
+        delay += 200
+      }
+    })
+}
+
+const faderight = (items) => {
+    items.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('fade-left');
+      }
+    });
+}
+
+let scroll = new IntersectionObserver(callback, options);
+buttonAnimation.forEach(element => {
+    scroll.observe(element);
+});
+
+let fadeRight = new IntersectionObserver(faderight, options);
+whoweareElement.forEach(element => {
+    fadeRight.observe(element);
+});
+
+let fade = new IntersectionObserver(fadecall, options);
+card.forEach(element => {
+  fade.observe(element);
+});
+
+let observer = new IntersectionObserver(callbacks, options);
+elements.forEach(element => {
+  observer.observe(element);
+});
+
+let fadeUp = new IntersectionObserver(fadeup, options);
+whoweareImage.forEach(element => {
+  fadeUp.observe(element);
+});
+
+let resource = new IntersectionObserver(fadeup, options);
+resourceCard.forEach(element => {
+  resource.observe(element);
+});
+
+
+// to Top button 
+const myButton = document.getElementById('scroll-to-Top')
+window.onscroll = function(){scrollFunction()}
+
+function scrollFunction() {
+    if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20 ){
+        myButton.style.display = 'block'
+    }
+    else{
+        myButton.style.display = 'none'
+    }
+}
+myButton.addEventListener('click', () =>{
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 })

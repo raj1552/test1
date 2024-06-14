@@ -10,6 +10,7 @@
     <link href='https://fonts.googleapis.com/css?family=DM Sans' rel='stylesheet'>
 </head>
 <body>
+    <button id="scroll-to-Top"><i class="fa-solid fa-arrow-up"></i></button>
     <div class="main">
         <div class="main-container">
             <div class="navbar">
@@ -24,7 +25,7 @@
                                 <li><a href="#">Home</a></li>
                                 <li><a href="#">About Us</a></li>
                                 <li><a href="#">Case Studies</a></li>
-                                <li class="hover-item"><a href="#">Resources</a> <i class="fa-solid fa-chevron-down"></i>
+                                <li class="hover-item"><div class="items"><a href="#">Resources</a> <i class="fa-solid fa-chevron-down"></i></div>
                                 <div class="hover-container">
                                     <div class="hover-elements">
                                         <div class="hover-image">
@@ -62,6 +63,9 @@
                     </div>
                     <div class="ham-burger" id="ham-burger">
                         <i class="fa-solid fa-bars"></i>
+                    </div>
+                    <div class="close-button" id="close-button">
+                        <i class="fa-solid fa-x"></i>
                     </div>
                     <div id="search-model" class="search-box">
                         <div class="model-content">
@@ -170,7 +174,7 @@
         </div>
         <div class="container-carousel">
             <div class="carousel">
-                <button class="carousel-button left"><i class="fa-solid fa-chevron-left" id="left-arrow"></i></button>
+                <button class="carousel-button" id="left-arrow"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="carousel-container">
                     <div class="carousel-items">
                         <img src="assets/layers.svg" alt="">
@@ -201,7 +205,7 @@
                         <h2>Quotient</h2>
                     </div>
                 </div>
-               <button class="carousel-button right"> <i class="fa-solid fa-chevron-right" id="right-arrow"></i></button>
+               <button class="carousel-button" id="right-arrow"> <i class="fa-solid fa-chevron-right"></i></button>
             </div>
         </div>
         <div class="news-container">
